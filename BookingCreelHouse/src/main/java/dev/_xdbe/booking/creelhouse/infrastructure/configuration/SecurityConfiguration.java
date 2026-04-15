@@ -27,12 +27,12 @@ public class SecurityConfiguration {
         return http
             .authorizeHttpRequests(auth -> auth
                 // Step 4a: add access control
-                // ...
+                .requestMatchers("/dashboard").hasRole("ADMIN")
                 // Step 4a: end
                 .anyRequest().permitAll()
             )
             // Step 4b: Add login form
-            // ...
+            .formLogin(withDefaults())
             // Step 4b: End of login form configuration
             
             .csrf((csrf) -> csrf
@@ -57,13 +57,12 @@ public class SecurityConfiguration {
 
         UserDetails guest = User.builder()
             .username("guest")
-            .password("{bcrypt}$2a$10$XXXX...") // remplace par le hash généré
+            .password("{bcrypt}$2a$10$7z3uFrEk.qMffzlUMx3DeeF0QPYHsuuUh9GDvNDcvHZBlxblUeLqe")
             .roles("GUEST")
             .build();
 
         return new InMemoryUserDetailsManager(admin, guest);
     }
-
     // Step 3: end
 
 }
