@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>B&B Creel's House</title> 
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=IM+Fell+English+SC&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="container">
+        <H1 class="cinzel-decorative">Book a room in the Creel's House!</H1>
+        <div class="column left-column">
+            <img th:src="@{/images/photo.webp}" alt="Creel's House" class="responsive-image"/>
+        </div>
+        <div class="column right-column">
+            <div class="form-container">
+                <p>Room for 2 people:</p>
+                <form th:action="@{/}" method="post">
+                    <div class="form-row">
+                        <label class="form-label" for="checkInDate">Select check in date:</label>
+                        <input class="form-input" type="date" id="checkInDate" name="checkInDate" required>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-label" for="checkOutDate">Select check out date:</label>
+                        <input class="form-input" type="date" id="checkOutDate" name="checkOutDate" required>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-label" for="nightStays">Night stays*:</label>
+                        <input class="form-input" type="input" id="nightStays" name="nightStays" required>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-label" for="name">Name:</label>
+                        <input class="form-input" type="input" id="name" name="name" required>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-label" for="creditCardNumber">Credit Card number:</label>
+                        <input class="form-input" type="input" id="creditCardNumber" name="creditCardNumber" minlength="16" maxlength="16" required>
+                    </div>
+                    <!-- Step 2: CSRF -->
+                    <!-- Step 2: End -->
+                    <div class="button-container">
+                        <button class="form-button" type="submit">Book</button>
+                    </div>
+                </form>
+                <p><i>*rates: 150&euro; per night<i></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

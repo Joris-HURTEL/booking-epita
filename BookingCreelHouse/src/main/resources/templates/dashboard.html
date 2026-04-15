@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>B&B Creel's House</title> 
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=IM+Fell+English+SC&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <H1 class="im-fell-english-sc-regular">Booking Dashboard</H1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Night Stays</th>
+                <th>Credit Card Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="booking : ${bookingList}">
+                <td th:text="${booking.name}">name</td>
+                <td th:text="${booking.checkInDate}">checkInDate</td>
+                <td th:text="${booking.checkOutDate}">checkOutDate</td>
+                <td th:text="${booking.nightStays}">nightStays</td>
+                <td th:text="${booking.creditCardNumber}">creditCardNumber</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/">Booking form</a>
+</body>
+</html>

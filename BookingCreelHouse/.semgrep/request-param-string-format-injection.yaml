@@ -1,0 +1,26 @@
+rules:
+  - id: request-param-string-format-injection
+    languages: [java]
+    severity: WARNING
+    message: >
+      User-controlled input from @RequestParam flows into String.format,
+      which may lead to XSS or injection vulnerabilities.
+    metadata:
+      cwe: CWE-79
+      owasp: "A03:2021 - Injection"
+    mode: taint
+    pattern-sources:
+      - patterns:
+          - pattern: $PARAM
+          - pattern-inside: |
+              $RET $FUNC(..., @RequestParam $TYPE $PARAM, ...) {
+                ...
+              }
+      - patterns:
+          - pattern: $PARAM
+          - pattern-inside: |
+              $RET $FUNC(..., @RequestParam(...) $TYPE $PARAM, ...) {
+                ...
+              }
+    pattern-sinks:
+      - pattern: String.format(...)

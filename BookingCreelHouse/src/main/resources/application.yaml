@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: BookingCreelHouse
+  datasource:
+    url: jdbc:h2:file:./booking.db
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update
+  # Step 1a: Configure SSL with the certificate and private key
+  # ...
+  # Step 1a: End of SSL configuration
+
+server:
+  port: 8443
+  # Step 1b: Enable SSL and specify ssl bundle
+  # ...
+  # Step 1b: End of SSL configuration
+  # Step 5: Configure session cookie with SameSite attribute
+  # ...
+  # Step 5: End of session cookie configuration
