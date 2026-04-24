@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: returntocorp/semgrep@sha256:aba64aaf601ff71b769b082d3c9f95cb02a2bb20a6404f42ae94f240aec6ace7
+      options: --user root
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
