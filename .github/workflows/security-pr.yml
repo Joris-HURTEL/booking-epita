@@ -1,0 +1,43 @@
+---
+name: security-pr
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  actions: read
+  security-events: write
+  contents: read
+
+jobs:
+  DependenciesAnalysis:
+    uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@v2.3.3"
+    permissions:
+      actions: read
+      security-events: write
+      contents: read
+
+  SourceCodeAnalysis:
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep@sha256:aba64aaf601ff71b769b082d3c9f95cb02a2bb20a6404f42ae94f240aec6ace7
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Semgrep differential analysis
+        run: |
+          semgrep --config .semgrep \
+            --sarif \
+            --output=SourceCodeAnalysisPR.sarif \
+            --baseline-commit=${{ github.event.pull_request.base.sha }}
+        continue-on-error: true
+
+      - name: Save differential report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SourceCodeAnalysisPR
+          path: SourceCodeAnalysisPR.sarif
