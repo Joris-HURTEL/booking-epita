@@ -32,10 +32,10 @@ jobs:
       - name: Run Semgrep differential analysis
         run: |
           semgrep --config .semgrep \
+            --error \
             --sarif \
             --output=SourceCodeAnalysisPR.sarif \
             --baseline-commit=${{ github.event.pull_request.base.sha }}
-        continue-on-error: true
 
       - name: Save differential report as artifact
         uses: actions/upload-artifact@v4
